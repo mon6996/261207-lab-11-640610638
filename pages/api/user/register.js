@@ -2,16 +2,20 @@ import { readUsersDB, writeUsersDB } from "../../../backendLibs/dbLib";
 import bcrypt from "bcrypt";
 import { checkToken } from "../../../backendLibs/checkToken";
 
-export default function userRegisterRoute(req, res) {
-  if (req.method === "POST") {
+export default function userRegisterRoute(req, res)
+{
+  if (req.method === "POST")
+  {
     const { username, password, isAdmin } = req.body;
 
     //if we try to add admin account
     //but token is not admin or token is not attached with request at all
     //we reject request
-    if (isAdmin) {
+    if (isAdmin)
+    {
       const user = checkToken(req);
-      if (!user || !user.isAdmin) {
+      if (!user || !user.isAdmin)
+      {
         return res.status(403).json({
           ok: false,
           message: "You do not have permission to create admin user",
